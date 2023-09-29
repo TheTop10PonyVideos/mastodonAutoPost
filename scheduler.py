@@ -52,6 +52,7 @@ def select_random_video(csv_file):
     with open(csv_file, 'r', encoding='utf-8') as file:
         reader = csv.DictReader(file)
         data = [entry for entry in reader if "[BLACKLIST]" not in entry['channel']]
+        
 
         if not data:
             return None
@@ -67,9 +68,8 @@ def display_video_info(video_data):
     numeric_month = int(video_data['month'])
     month_name = convert_numeric_month_to_name(numeric_month)
     year = video_data['year']
-    link = video_data['link']
-    
-    message = f'The randomly selected top pony video of the day is: "{title}" from "{channel}" from {month_name} {year}:\n{link}'
+    alternatelink = video_data['alternate link']
+    message = f'The randomly selected top pony video of the day is: "{title}" from "{channel}" from {month_name} {year}:\n{alternatelink}'
     return message
 
 # save entries to json file
