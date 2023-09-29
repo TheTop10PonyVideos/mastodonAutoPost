@@ -72,34 +72,26 @@ def display_video_info(video_data):
 
 # save entries to json file
 def save_post_data_to_json(post_data):
-    # Load existing data from the JSON file (if it exists)
     existing_data = []
     if os.path.exists('posts.json'):
         with open('posts.json', 'r', encoding='utf-8') as json_file:
             existing_data = json.load(json_file)
-
-    # Append the new post data to the existing data
     existing_data.append(post_data)
 
-    # Save the updated data back to the JSON file
     with open('posts.json', 'w', encoding='utf-8') as json_file:
         json.dump(existing_data, json_file, ensure_ascii=False, indent=4)
 
-# Function to schedule a private Mastodon post
+# Function to schedule a mastodon post (its actually puplic)
 def schedule_private_mastodon_post(instance_url, access_token, message, scheduled_time_utc):
     mastodon = Mastodon(
         access_token=access_token,
         api_base_url=instance_url
     )
 
-    # Convert scheduled_time_utc to a datetime object in UTC timezone
     scheduled_time = datetime.utcfromtimestamp(scheduled_time_utc).replace(tzinfo=timezone.utc)
-
-    # Replace 'your_mastodon_account' with your Mastodon account username
-    response = mastodon.status_post(message, scheduled_at=scheduled_time, visibility='private')
+    response = mastodon.status_post(message, scheduled_at=scheduled_time, visibility='puplic') # see its puplic :PPPP
     print(scheduled_time, message)
 
-    # Save the post data to a JSON file
     post_data = {
         'timestamp_utc': scheduled_time_utc,
         'message': message,
@@ -107,22 +99,18 @@ def schedule_private_mastodon_post(instance_url, access_token, message, schedule
     }
     save_post_data_to_json(post_data)
 
-# Function to bulk post a specified number of times
 def bulk_post_to_mastodon(instance_url, access_token, num_posts):
-    global latest_scheduled_time  # Declare latest_scheduled_time as global
+    global latest_scheduled_time  
 
     for i in range(num_posts):
-        csv_file = 'Top_10_Pony_Videos.csv'  # Replace with the path to your CSV file
+        csv_file = 'Top_10_Pony_Videos.csv'  #replace this maybe idk
         random_video = select_random_video(csv_file)
 
         if random_video:
             message = display_video_info(random_video)
 
             if latest_scheduled_time:
-                # Convert the latest_scheduled_time to a datetime object
                 latest_scheduled_datetime = datetime.fromtimestamp(latest_scheduled_time)
-
-                # If there's a latest scheduled time, schedule the post for the next day
                 scheduled_datetime = latest_scheduled_datetime + timedelta(days=1)
             else:
                 # If it's the first post, schedule it for the next day at 9 AM NY time
@@ -133,8 +121,6 @@ def bulk_post_to_mastodon(instance_url, access_token, num_posts):
             scheduled_time_utc = int(scheduled_datetime.timestamp())
             schedule_private_mastodon_post(instance_url, access_token, message, scheduled_time_utc)
             print(f'Post {i+1} scheduled on Mastodon for {scheduled_datetime}.')
-
-            # Update the latest scheduled time for the next post
             latest_scheduled_time = scheduled_time_utc
         else:
             print('No eligible videos found in the CSV file.')
