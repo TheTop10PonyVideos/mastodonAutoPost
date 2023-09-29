@@ -6,7 +6,7 @@ from mastodon import Mastodon
 import os
 import json
 from dotenv import load_dotenv
-
+import calendar
 
 load_dotenv()
 
@@ -58,16 +58,19 @@ def select_random_video(csv_file):
 
         random_entry = random.choice(data)
         return random_entry
-
+def convert_numeric_month_to_name(numeric_month):
+    return calendar.month_name[numeric_month]
 # get vid data from csv file
 def display_video_info(video_data):
     title = video_data['title']
     channel = video_data['channel']
     month = video_data['month']
+    numeric_month = int(video_data['month'])  # Convert to an integer
+    month_name = convert_numeric_month_to_name(numeric_month)  # Convert numeric month to name
     year = video_data['year']
     link = video_data['link']
-
-    message = f'The randomly selected top pony video of the day is: "{title}" from "{channel}" from {month} {year}:\n{link}'
+    
+    message = f'The randomly selected top pony video of the day is: "{title}" from "{channel}" from {month_name} {year}:\n{link}'
     return message
 
 # save entries to json file
