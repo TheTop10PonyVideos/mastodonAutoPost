@@ -113,6 +113,7 @@ def bulk_post_to_mastodon(instance_url, access_token, num_posts):
             message = display_video_info(random_video)
 
             if latest_scheduled_time:
+                #if there are post entries in posts.josn it will get the latest entry and calculate new post dates starting at that date
                 latest_scheduled_datetime = datetime.fromtimestamp(latest_scheduled_time)
                 scheduled_datetime = latest_scheduled_datetime + timedelta(days=1)
             else:
