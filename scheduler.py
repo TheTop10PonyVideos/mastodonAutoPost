@@ -64,9 +64,8 @@ def convert_numeric_month_to_name(numeric_month):
 def display_video_info(video_data):
     title = video_data['title']
     channel = video_data['channel']
-    month = video_data['month']
-    numeric_month = int(video_data['month'])  # Convert to an integer
-    month_name = convert_numeric_month_to_name(numeric_month)  # Convert numeric month to name
+    numeric_month = int(video_data['month'])
+    month_name = convert_numeric_month_to_name(numeric_month)
     year = video_data['year']
     link = video_data['link']
     
