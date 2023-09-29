@@ -91,7 +91,7 @@ def schedule_private_mastodon_post(instance_url, access_token, message, schedule
     )
 
     scheduled_time = datetime.utcfromtimestamp(scheduled_time_utc).replace(tzinfo=timezone.utc)
-    response = mastodon.status_post(message, scheduled_at=scheduled_time, visibility='puplic') # see its puplic :PPPP
+    response = mastodon.status_post(message, scheduled_at=scheduled_time, visibility='public') # see its puplic :PPPP
     print(scheduled_time, message)
 
     post_data = {
