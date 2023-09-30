@@ -23,9 +23,9 @@ Create a .env file and paste following lines into this file (use your editor)
 # Step 3: Downloading csv archives/formatting
 
 Get your csv video archive (Top 10 Pony video archive: https://docs.google.com/spreadsheets/d/1rEofPkliKppvttd8pEX8H6DtSljlfmQLdFR-SlyyX7E/edit#gid=0)
+
 **Important**
 If you want to use your own csv file make sure you have at the following entries!: year, month, title, channel, alternative link
-**Important**
 
 # Step 4: Install required libaries:
 
@@ -35,6 +35,14 @@ If you want to use your own csv file make sure you have at the following entries
 
 ``python scheduler.py``
 
-# Step 6 : optional convert your py file into an exe for easier use
+# Step 6 : Convert to an .exe file
+
+This step is optional and requires an additional libary: pyinstaller
+Download it with the following command:
+
+``pip install pyinstaller``
+
+Once you did that you can now convert you python script into a .exe file!
+Use this command:
 
 ``pyinstaller --name MastodonAutoScheduler --onefile scheduler.py``
