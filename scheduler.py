@@ -74,7 +74,7 @@ def display_video_info(video_data):
     month_name = convert_numeric_month_to_name(numeric_month)
     year = video_data['year']
     alternatelink = video_data['alternate link']
-    message = f'The randomly selected top pony video of the day is: "{title}" from "{channel}" from {month_name} {year}:\n{alternatelink}'
+    message = f'The randomly selected top pony video of the day is: "{title}" from "{channel}" from {month_name} {year}:\n{alternatelink}' #Text can be edited to whatever you like
     return message
 
 # save entries to json file
