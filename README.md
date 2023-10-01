@@ -12,7 +12,7 @@ Download the repository either with git or with the download as zip functionalit
 # Step 2: .env file setup
 Create a .env file and paste following lines into this file (use your editor)
 
-``access_token = 'Your acces token'``
+``access_token = 'Your access token'``
 
 ``instance_url = 'your mastodon instance'``
 
